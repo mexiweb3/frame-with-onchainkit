@@ -4,7 +4,7 @@ import { NEXT_PUBLIC_URL } from '../../config';
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
   const body: FrameRequest = await req.json();
-  const { isValid } = await getFrameMessage(body);
+  const { isValid } = await getFrameMessage(body, {allowFramegear: true});
 
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
