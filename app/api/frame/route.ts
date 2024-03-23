@@ -37,9 +37,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           label: `State: ${state?.page || 0}`,
         },
         {
-          action: 'link',
+          action: 'post_redirect',
           label: 'OnchainKit',
-          target: 'https://onchainkit.xyz',
+          target: `${NEXT_PUBLIC_URL}`,
         },
         {
           action: 'post_redirect',
