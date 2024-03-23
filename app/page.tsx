@@ -1,46 +1,27 @@
 import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import type { Metadata } from 'next';
 import { NEXT_PUBLIC_URL } from './config';
+import { initFrame } from './utils/framesMetadata';
 
-const frameMetadata = getFrameMetadata({
-  buttons: [
-    {
-      label: 'Story time',
-    },
-    {
-      action: 'tx',
-      label: 'Send Base Sepolia',
-      target: `${NEXT_PUBLIC_URL}/api/tx`,
-      postUrl: `${NEXT_PUBLIC_URL}/api/tx-success`,
-    },
-  ],
-  image: {
-    src: `${NEXT_PUBLIC_URL}/api/image/0`,
-    aspectRatio: '1:1',
-  },
-  input: {
-    text: 'Tell me a story',
-  },
-  postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-});
+const frameMetadata = getFrameMetadata(initFrame);
 
 export const metadata: Metadata = {
-  title: 'zizzamia.xyz',
-  description: 'LFG',
-  openGraph: {
-    title: 'zizzamia.xyz',
-    description: 'LFG',
-    images: [`${NEXT_PUBLIC_URL}/park-1.png`],
-  },
-  other: {
-    ...frameMetadata,
-  },
+	title: 'frames for gg',
+	description: 'LFG',
+	openGraph: {
+		title: 'frames for gg',
+		description: 'LFG',
+		images: [`${NEXT_PUBLIC_URL}/park-1.png`],
+	},
+	other: {
+		...frameMetadata,
+	},
 };
 
 export default function Page() {
-  return (
-    <>
-      <h1>zizzamia.xyz</h1>
-    </>
-  );
+	return (
+		<>
+			<h1>frames for gg</h1>
+		</>
+	);
 }

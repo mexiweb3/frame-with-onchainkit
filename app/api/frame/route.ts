@@ -30,7 +30,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 			{ status: 302 },
 		);
 	}
-	if (message?.button === 2) {
+	if (message?.button === 1 && !state.isHome) {
 		state = {
 			page: 0,
 			isHome: true,
