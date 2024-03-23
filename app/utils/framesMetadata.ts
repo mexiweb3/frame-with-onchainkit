@@ -20,7 +20,7 @@ const initFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/api/image/0`,
+        src: `${NEXT_PUBLIC_URL}/park-1.png`,
         aspectRatio: '1:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
@@ -33,7 +33,7 @@ const projectFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/api/image/0`,
+        src: `${NEXT_PUBLIC_URL}/park-2.png`,
         aspectRatio: '1:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
@@ -46,7 +46,7 @@ const passportFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/api/image/0`,
+        src: `${NEXT_PUBLIC_URL}/park-3.png`,
         aspectRatio: '1:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
@@ -65,7 +65,7 @@ const qfFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/api/image/0`,
+        src: `${NEXT_PUBLIC_URL}/park-4.png`,
         aspectRatio: '1:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
