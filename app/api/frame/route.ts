@@ -13,6 +13,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
   const text = message.input || '';
   let state = {
     page: 0,
+    isHome: false,
   };
   try {
     state = JSON.parse(decodeURIComponent(message.state?.serialized));
@@ -29,6 +30,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       { status: 302 },
     );
   }
+  if (message?.button === 2) {
+    state = {
+      page: 0,
+      isHome: true,
+    };
+  }
 
   return new NextResponse(
     getFrameHtmlResponse({
@@ -37,9 +44,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
           label: `State: ${state?.page || 0}`,
         },
         {
-          action: 'post',
-          label: 'Back',
-          target: `${NEXT_PUBLIC_URL}`,
+          // action: 'post',
+          label:  state.isHome ? 'Hello' : 'Back',
+          // target: `${NEXT_PUBLIC_URL}`,
         },
         {
           action: 'post_redirect',
