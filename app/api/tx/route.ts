@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData, parseEther } from 'viem';
 import { base } from 'viem/chains';
 import BuyMeACoffeeABI from '../../_contracts/BuyMeACoffeeABI';
-import { BUY_MY_COFFEE_CONTRACT_ADDR } from '../../config';
+import { BUY_MY_COFFEE_CONTRACT_ADDR, NEYNAR_ONCHAIN_KIT } from '../../config';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 
 async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   const body: FrameRequest = await req.json();
-  const { isValid } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT', allowFramegear: true });
+  const { isValid } = await getFrameMessage(body, { neynarApiKey: NEYNAR_ONCHAIN_KIT, allowFramegear: true });
 
   if (!isValid) {
     return new NextResponse('Message not valid', { status: 500 });
