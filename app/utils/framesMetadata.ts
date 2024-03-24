@@ -1,12 +1,12 @@
 import { FrameMetadataType } from '@coinbase/onchainkit';
 import { NEXT_PUBLIC_URL } from '../config';
 
-const initFrame: FrameMetadataType = {
+const initFrame = (state: { projectPath?: string, bannerImg?: string }): FrameMetadataType => ({
     buttons: [
         {
             label: 'Vonate',
             action: "link",
-            target: 'https://explorer.gitcoin.co/#/round/8453/0x5d1b2d06d472ffff89edc666101b56c35d1217d8/1'
+            target: `https://explorer.gitcoin.co/#/round/${state.projectPath || '0'}`
         },
         {
             label: 'Passport',
@@ -22,11 +22,11 @@ const initFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `https://ipfs.io/ipfs/bafkreibq4sjhcuuaktf23xun4vetvovoh65fk23ryfs4gdgmuhipr2rlle`,
+        src: state.bannerImg ? `https://ipfs.io/ipfs/${state.bannerImg}` : `${NEXT_PUBLIC_URL}/default.jpg`,
         aspectRatio: '1.91:1'
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-};
+});
 
 const projectFrame: FrameMetadataType = {
     buttons: [
@@ -68,7 +68,7 @@ const qfFrame: FrameMetadataType = {
     ],
     image: {
         src: `${NEXT_PUBLIC_URL}/qf0.png`,
-        aspectRatio: '1:1',
+        aspectRatio: '1.91:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 };
@@ -87,7 +87,7 @@ const qfFrame1: FrameMetadataType = {
     ],
     image: {
         src: `${NEXT_PUBLIC_URL}/qf1.png`,
-        aspectRatio: '1:1',
+        aspectRatio: '1.91:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 };

@@ -22,10 +22,10 @@ function getNewPageId(prevPage: number, buttonIndex: number) {
 	}
 }
 
-function renderFrameMetadata(page: number) {
+function renderFrameMetadata(state: any, page: number) {
 	switch (page) {
 		case 0:
-			return initFrame;
+			return initFrame(state);
 		case 10:
 			return projectFrame;
 		case 20:
@@ -35,7 +35,7 @@ function renderFrameMetadata(page: number) {
 		case 31:
 			return qfFrame1;
 		default:
-			return initFrame;
+			return initFrame(state);
 	}
 
 }
@@ -52,6 +52,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let state = {
 		page: getNewPageId(0, buttonIndex),
+		projectPath: '',
+		bannerImg: '',
 	};
 	try {
 		state = JSON.parse(decodeURIComponent(message.state?.serialized));
@@ -63,23 +65,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 		console.error(e);
 	}
 
-	/**
-	 * Use this code to redirect to a different page
-	 */
-	// if (buttonIndex === 1 && !state.isHome) {
-	// 	state = {
-	// 		page: 0,
-	// 		isHome: true,
-	// 	};
-	// }
-
 	return new NextResponse(
 		getFrameHtmlResponse({
-			...renderFrameMetadata(state?.page || 0),
-			state: {
-				page: state?.page || 0,
-				time: new Date().toISOString(),
-			},
+			...renderFrameMetadata(state, state?.page || 0),
+			state,
 		}),
 	);
 }
