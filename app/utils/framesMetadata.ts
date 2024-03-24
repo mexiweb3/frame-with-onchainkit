@@ -65,10 +65,29 @@ const qfFrame: FrameMetadataType = {
         },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/park-4.png`,
+        src: `${NEXT_PUBLIC_URL}/qf0.png`,
         aspectRatio: '1:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 };
 
-export { initFrame, projectFrame, passportFrame, qfFrame };
+const qfFrame1: FrameMetadataType = {
+    buttons: [
+        {
+            label: 'Back',
+        },
+        {
+            label: '<',
+        },
+        {
+            label: '>',
+        },
+    ],
+    image: {
+        src: `${NEXT_PUBLIC_URL}/qf1.png`,
+        aspectRatio: '1:1',
+    },
+    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+};
+
+export { initFrame, projectFrame, passportFrame, qfFrame, qfFrame1 };

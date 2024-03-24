@@ -1,14 +1,24 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
-import { NEXT_PUBLIC_URL, NEYNAR_ONCHAIN_KIT } from '../../config';
-import { initFrame, projectFrame, passportFrame, qfFrame } from '../../utils/framesMetadata';
+import { NEYNAR_ONCHAIN_KIT } from '../../config';
+import { initFrame, projectFrame, passportFrame, qfFrame, qfFrame1 } from '../../utils/framesMetadata';
+
+
+const totalQFPages = 1;
 
 function getNewPageId(prevPage: number, buttonIndex: number) {
+	const qfMaxIndex = 30 + totalQFPages;
 	if (prevPage === 0) {
 		return buttonIndex * 10;
 	}
 	else if (buttonIndex === 1) {
 		return 0;
+	}
+	else if (prevPage >= 30 && prevPage <= qfMaxIndex) {
+		if (buttonIndex === 3) {
+			return prevPage + 1 <= qfMaxIndex ? prevPage +1 : qfMaxIndex;
+		}
+		return prevPage - 1 >= 30 ? prevPage - 1 : 30;
 	}
 }
 
@@ -22,6 +32,8 @@ function renderFrameMetadata(page: number) {
 			return passportFrame;
 		case 30:
 			return qfFrame;
+		case 31:
+			return qfFrame1;
 		default:
 			return initFrame;
 	}
@@ -40,10 +52,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
 	let state = {
 		page: getNewPageId(0, buttonIndex),
-		// isHome: false,
 	};
 	try {
 		state = JSON.parse(decodeURIComponent(message.state?.serialized));
+		state = {
+			...state,
+			page: getNewPageId(state?.page|| 0, buttonIndex),
+		};
 	} catch (e) {
 		console.error(e);
 	}
@@ -61,26 +76,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 	return new NextResponse(
 		getFrameHtmlResponse({
 			...renderFrameMetadata(state?.page || 0),
-			// buttons: [
-			// 	{
-			// 		label: `State: ${state?.page || 0} & ${body.untrustedData.buttonIndex || 0}`,
-			// 	},
-			// 	{
-			// 		// action: 'post',
-			// 		label: state.isHome ? 'Hello' : 'Back',
-			// 		// target: `${NEXT_PUBLIC_URL}`,
-			// 	},
-			// 	{
-			// 		action: 'post_redirect',
-			// 		label: 'Dog pictures',
-			// 	},
-			// ],
-			// image: {
-			// 	src: `${NEXT_PUBLIC_URL}/park-1.png`,
-			// },
-			// postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 			state: {
-				page: getNewPageId(state?.page || 0, buttonIndex),
+				page: state?.page || 0,
 				time: new Date().toISOString(),
 			},
 		}),
