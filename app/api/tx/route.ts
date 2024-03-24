@@ -2,8 +2,8 @@ import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData, parseEther } from 'viem';
 import { base } from 'viem/chains';
-import BuyMeACoffeeABI from '../../_contracts/BuyMeACoffeeABI';
-import { BUY_MY_COFFEE_CONTRACT_ADDR, NEYNAR_ONCHAIN_KIT } from '../../config';
+import BaseNftContractAbi from '../../_contracts/BaseNftContractAbi';
+import { BASE_NFT_MINTER_ADDRESS, NEYNAR_ONCHAIN_KIT } from '../../config';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
 
 async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
@@ -15,9 +15,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   }
 
   const data = encodeFunctionData({
-    abi: BuyMeACoffeeABI,
-    functionName: 'buyCoffee',
-    args: [parseEther('1'), 'Coffee all day!'],
+    abi: BaseNftContractAbi,
+    functionName: 'awardItem',
+    args: ['https://ipfs.io/ipfs/bafybeiduk3eyw6pdtqp4mr6wtws3pjzu4fdcunxbisq55bf2fnrjrgvm6y'],
   });
 
   const txData: FrameTransactionResponse = {
@@ -26,7 +26,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     params: {
       abi: [],
       data,
-      to: BUY_MY_COFFEE_CONTRACT_ADDR,
+      to: BASE_NFT_MINTER_ADDRESS,
       value: parseEther('0.00004').toString(), // 0.00004 ETH
     },
   };
