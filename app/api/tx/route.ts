@@ -1,7 +1,7 @@
 import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData, parseEther } from 'viem';
-import { base } from 'viem/chains';
+import { baseSepolia } from 'viem/chains';
 import BaseNftContractAbi from '../../_contracts/BaseNftContractAbi';
 import { BASE_NFT_MINTER_ADDRESS, NEYNAR_ONCHAIN_KIT } from '../../config';
 import type { FrameTransactionResponse } from '@coinbase/onchainkit/frame';
@@ -21,7 +21,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
   });
 
   const txData: FrameTransactionResponse = {
-    chainId: `eip155:${base.id}`, // Remember Base Sepolia might not work on Warpcast yet
+    chainId: `eip155:${baseSepolia.id}`, // Remember Base Sepolia might not work on Warpcast yet
     method: 'eth_sendTransaction',
     params: {
       abi: [],
