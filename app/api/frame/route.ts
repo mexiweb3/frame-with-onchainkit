@@ -1,13 +1,14 @@
 import { FrameRequest, getFrameMessage, getFrameHtmlResponse } from '@coinbase/onchainkit/frame';
 import { NextRequest, NextResponse } from 'next/server';
 import { NEYNAR_ONCHAIN_KIT } from '../../config';
-import { initFrame, projectFrame, passportFrame, qfFrame, qfFrame1 } from '../../utils/framesMetadata';
+import { initFrame, passportFrame, qfFrame, qfFrame1, qfFrame2 } from '../../utils/framesMetadata';
 
 
-const totalQFPages = 1;
+const totalQFPages = 3;
 
 function getNewPageId(prevPage: number, buttonIndex: number) {
-	const qfMaxIndex = 30 + totalQFPages;
+	// starts on 29 because of indexes
+	const qfMaxIndex = 29 + totalQFPages;
 	if (prevPage === 0) {
 		return buttonIndex * 10;
 	}
@@ -26,14 +27,14 @@ function renderFrameMetadata(state: any, page: number) {
 	switch (page) {
 		case 0:
 			return initFrame(state);
-		case 10:
-			return projectFrame;
 		case 20:
 			return passportFrame;
 		case 30:
 			return qfFrame;
 		case 31:
 			return qfFrame1;
+		case 32:
+			return qfFrame2;
 		default:
 			return initFrame(state);
 	}

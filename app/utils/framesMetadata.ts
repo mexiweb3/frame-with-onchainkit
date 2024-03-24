@@ -28,28 +28,20 @@ const initFrame = (state: { projectPath?: string, bannerImg?: string }): FrameMe
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 });
 
-const projectFrame: FrameMetadataType = {
-    buttons: [
-        {
-            label: 'Back',
-        },
-    ],
-    image: {
-        src: `${NEXT_PUBLIC_URL}/park-2.png`,
-        aspectRatio: '1:1',
-    },
-    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
-};
-
 const passportFrame: FrameMetadataType = {
     buttons: [
         {
             label: 'Back',
         },
+        {
+            label: 'See your passport',
+            action: "link",
+            target: `https://passport.gitcoin.co`
+        },
     ],
     image: {
-        src: `${NEXT_PUBLIC_URL}/park-3.png`,
-        aspectRatio: '1:1',
+        src: `${NEXT_PUBLIC_URL}/score.png`,
+        aspectRatio: '1.91:1',
     },
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 };
@@ -92,4 +84,23 @@ const qfFrame1: FrameMetadataType = {
     postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
 };
 
-export { initFrame, projectFrame, passportFrame, qfFrame, qfFrame1 };
+const qfFrame2: FrameMetadataType = {
+    buttons: [
+        {
+            label: 'Back',
+        },
+        {
+            label: '<',
+        },
+        {
+            label: '>',
+        },
+    ],
+    image: {
+        src: `${NEXT_PUBLIC_URL}/qf2.png`,
+        aspectRatio: '1.91:1',
+    },
+    postUrl: `${NEXT_PUBLIC_URL}/api/frame`,
+};
+
+export { initFrame, passportFrame, qfFrame, qfFrame1, qfFrame2 };
